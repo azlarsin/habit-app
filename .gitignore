@@ -1,0 +1,13 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+node_modules
+
+/.idea
+
+#.htaccess
+
+/test
+
+*/.DS_Store
+
+.DS_Store
