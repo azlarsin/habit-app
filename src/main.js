@@ -14,7 +14,7 @@ const App = () => {
     return (
         <div className="root">
 
-            <Calendar />
+            <List />
         </div>
     )
 };

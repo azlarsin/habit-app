@@ -45,7 +45,7 @@ export const getDetailDateByDate = (d, separator = '-') => {
         month = month < 10 ? '0' + month : month;
         date = date < 10 ? '0' + date : date;
 
-        return `${d.getFullYear()}${separator}${month}${separator}${date}`
+        return `${d.getFullYear()}${separator}${month}${separator}${date}`;
     }
 
     return null;

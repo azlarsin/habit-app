@@ -65,10 +65,16 @@ class Calendar extends Component {
         });
     }
 
+	handleTransitionEnd(e) {
+    	e.stopPropagation();
+    	e.preventDefault();
+    }
+
     render() {
         let width = this.props.width || 500;
+
         return (
-            <div className="calendar" style={{ width }}>
+            <div className="calendar" style={{ width }} onTransitionEnd={ this.handleTransitionEnd }>
                 <section className="year">
                     <div
                         className="control prev"

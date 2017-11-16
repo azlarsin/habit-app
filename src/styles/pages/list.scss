@@ -1,0 +1,54 @@
+
+.list {
+
+  .control {
+
+  }
+
+  .habits {
+
+    transition: all .5s;
+
+    .habit-info {
+      background-color: rgba(0, 0, 255, 0.2);
+      min-height: 50px;
+      line-height: 50px;
+    }
+
+    .habit-box {
+      visibility: hidden;
+      opacity: 0;
+      height: 0;
+
+      border: 0 solid transparent;
+
+      transform-origin: 0 0 0;
+
+      transition: all .5s;
+
+      //background-color: blue;
+
+      position: relative;
+
+      > div {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform-origin: 0 0 0;
+        transform: scaleY(0) translateX(-50%);
+        transition: all .5s;
+      }
+    }
+
+    .habit-box.open {
+      visibility: visible;
+      height: 570px;
+      opacity: 1;
+      border: 20px solid transparent;
+
+      > div {
+        transform: scaleY(1) translateX(-50%);
+      }
+    }
+  }
+}
