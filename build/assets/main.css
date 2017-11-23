@@ -1,0 +1,117 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+
+body {
+  font-size: 14px; }
+
+#qwe .root .calendar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 1px;
+  -webkit-box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
+  #qwe .root .calendar > section {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    min-height: 50px; }
+    #qwe .root .calendar > section > div {
+      -ms-flex-preferred-size: 14.28571%;
+          flex-basis: 14.28571%;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      position: relative; }
+    #qwe .root .calendar > section > .date:not(.other) {
+      cursor: pointer;
+      -webkit-transition: all .2s;
+      transition: all .2s;
+      position: relative; }
+    #qwe .root .calendar > section > .date:not(.other):hover {
+      font-size: 18px;
+      text-shadow: 0 0 3px rgba(0, 0, 255, 0.1); }
+    #qwe .root .calendar > section > .date:not(.other):hover:after {
+      pointer-events: none;
+      position: absolute;
+      z-index: -1;
+      content: '';
+      top: 100%;
+      left: 5%;
+      height: 10px;
+      width: 90%;
+      opacity: 0;
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, transparent 80%);
+      -webkit-transition-duration: 0.3s;
+              transition-duration: 0.3s;
+      -webkit-transition-property: opacity, -webkit-transform;
+      transition-property: opacity, -webkit-transform;
+      transition-property: transform, opacity;
+      transition-property: transform, opacity, -webkit-transform; }
+    #qwe .root .calendar > section > .date:not(.other):hover:after {
+      opacity: 1;
+      -webkit-transform: translateY(5px);
+              transform: translateY(5px); }
+    #qwe .root .calendar > section > .date:before {
+      content: '';
+      display: block;
+      padding-top: 100%; }
+    #qwe .root .calendar > section > .date.other {
+      color: rgba(0, 0, 0, 0.2); }
+  #qwe .root .calendar section.year {
+    background-color: rgba(57, 139, 252, 0.5); }
+    #qwe .root .calendar section.year > div.control {
+      cursor: pointer;
+      opacity: .7;
+      -webkit-transition: opacity .2s, -webkit-transform .2s;
+      transition: opacity .2s, -webkit-transform .2s;
+      transition: opacity .2s, transform .2s;
+      transition: opacity .2s, transform .2s, -webkit-transform .2s; }
+    #qwe .root .calendar section.year > div.control:hover {
+      opacity: 1;
+      -webkit-transform: scale(1.3);
+              transform: scale(1.3); }
+    #qwe .root .calendar section.year > div.prev {
+      margin-right: auto; }
+    #qwe .root .calendar section.year > div.next {
+      margin-left: auto; }
+  #qwe .root .calendar section.week {
+    -webkit-box-flex: 0.14286;
+        -ms-flex: 0.14286;
+            flex: 0.14286;
+    position: relative; }
+    #qwe .root .calendar section.week:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 90%;
+      left: 5%;
+      -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+              box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05); }

@@ -19,12 +19,20 @@ class HabitInfo extends React.Component {
 
 		return (
 			<div className="habit-info">
-
-				<div className="info">
-					<div className="">
+				<div className="left">
+					<div className="name">
 						{ habit.name }
 					</div>
+
+					<div className="total">
+						{ habit.createTime }
+					</div>
 				</div>
+
+				<div className="right operate">
+
+				</div>
+
 				<div className="done-tabs">
 
 				</div>

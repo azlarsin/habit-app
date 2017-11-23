@@ -22,20 +22,25 @@ const assetsPath = function (_path) {
 
 module.exports = {
     // devtool: 'cheap-module-source-map',
-    // devtool: 'inline-source-map',
+    devtool: 'cheap-module-eval-source-map',
 
     entry: {
+
         vendor: [
             "react",
             "react-dom",
             "react-router",
             "babel-regenerator-runtime"
         ],
-        app: './src/main.js'
+        app: [
+            'react-hot-loader/patch',
+            './src/main.js'
+        ]
     },
     output: {
         path: path.resolve(__dirname, "build"),
         // publicPath: path.resolve(__dirname, "build", "assets"),
+        publicPath: '/',
         filename: 'main.js'
     },
     resolve: {
@@ -66,7 +71,7 @@ module.exports = {
                         {
                             loader: "postcss-loader",
                             options: {
-                                sourceMap: true,
+                                // sourceMap: true,
                                 plugins: function () {
                                     return [
                                         require("autoprefixer")
@@ -77,7 +82,7 @@ module.exports = {
                         {
                             loader: "sass-loader",
                             options: {
-                                sourceMap: true
+                                // sourceMap: true
                             }
                         }
                     ]
@@ -112,9 +117,9 @@ module.exports = {
         ]
     },
 
-    // devServer: {
-    //     watchContentBase: true
-    // },
+    devServer: {
+        hot: true
+    },
 
     plugins: [
         new webpack.DefinePlugin({
@@ -130,6 +135,8 @@ module.exports = {
 
         }),
 
-        new ExtractTextPlugin('assets/main.css')
+        new ExtractTextPlugin('assets/main.css'),
+        // new webpack.NamedModulesPlugin(),
+        // new webpack.HotModuleReplacementPlugin()
     ]
 };

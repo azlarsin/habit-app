@@ -14,6 +14,30 @@ export const WEEK = [
     'Sat'
 ];
 
+export const getDatesByWeek = (year = new Date().getFullYear(), month = new Date().getMonth() + 1, date = new Date().getDate()) => {
+	month = month - 1;
+	let d = new Date(year, month, date),
+		day = d.getDay();
+
+
+	let start = 0 - day;
+
+	d = new Date(d.setDate(start + date));
+
+	let dates = [];
+	for(let i = 0;i < 7;i++) {
+		dates.push({
+			date: d.getDate(),
+			fullDate: getDetailDateByDate(d),
+			current: isOtherMonth(d, month)
+		});
+
+		d = new Date(d.setDate(d.getDate() + 1));
+	}
+
+	return dates;
+};
+
 export const getDatesByMonth = (year, month) => {
     month = month - 1;
     let d = new Date(year, month),
@@ -58,3 +82,12 @@ export const isOtherMonth = (d, month) => {
 export const getToday = () => {
     return getDetailDateByDate(new Date);
 };
+
+// crate uid
+export function uuid() {
+	return s4() + s4() + "-" + s4() + "-" + s4() + "-" +
+		s4() + "-" + s4() + s4() + s4();
+}
+function s4() {
+	return Math.floor((1 + Math.random()) * 0x10000);
+}

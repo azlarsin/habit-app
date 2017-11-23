@@ -5,21 +5,26 @@
  */
 
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader'
 
-import List from "@/pages/List";
-import Calendar from "@/components/Calendar";
-
-const App = () => {
-    return (
-        <div className="root">
-
-            <List />
-        </div>
-    )
-};
-
+import App from "@/App";
 
 require("@/styles/main.scss");
 
-ReactDom.render(<App/>, document.getElementById("qwe"));
+const render = Component => {
+
+    ReactDOM.render(
+        <AppContainer>
+            <Component />
+        </AppContainer>,
+        document.getElementById('qwe'),
+    )
+};
+
+render(App);
+
+// Webpack Hot Module Replacement API
+if (module.hot) {
+    module.hot.accept()
+}

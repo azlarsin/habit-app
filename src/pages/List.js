@@ -4,63 +4,18 @@
  * @date 13/11/2017
  */
 
-
 import React, { Component } from 'react';
+import { Row, Col } from 'antd';
 
 import Calendar  from "@/components/Calendar";
-import { getToday } from "@/utils/Utils";
 
 class List extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            habits: [],
-            loading: true
+            habits: this.props.habits
         };
-
-        this.handleAddHabit = this.handleAddHabit.bind(this);
-
-        this.saveState = this.saveState.bind(this);
-		this.__saveData = this.__saveData.bind(this);
-    }
-
-    componentWillMount() {
-        // todo: fetch habits
-
-        let { habitAppData } = localStorage;
-
-		this.setState({
-			habits: habitAppData ? JSON.parse(habitAppData) : [],
-			loading: false
-        })
-    }
-
-    saveState(state) {
-        this.setState(state, this.__saveData)
-    }
-
-	__saveData() {
-        let state = this.state;
-
-        let { habits } = state;
-
-        localStorage.habitAppData = JSON.stringify(habits);
-    }
-
-    handleAddHabit() {
-        let newHabit = {
-            id: "habit-" + Date.now(),
-            name: '',
-            createDate: getToday()
-        };
-
-        let habits = this.state.habits;
-        habits.push(newHabit);
-
-        this.saveState({
-            habits: habits
-        });
     }
 
     toggleHabitBox(e) {
@@ -72,7 +27,7 @@ class List extends Component {
     }
 
     render() {
-        if(this.state.loading) {
+        if(!this.props.habits) {
             return (
                 <div>
                     Loading...
@@ -82,23 +37,13 @@ class List extends Component {
 
         return (
             <div className="list">
-                <div className="control">
-                    <div
-                        className="add-habit"
-                        onClick={ this.handleAddHabit }
-                    >
-                        + Add habit
-                    </div>
-                </div>
-
-
-                <div
+                <Row
                     className="habits"
                     onClick={ this.toggleHabitBox }
                 >
                     {
                         this.state.habits.map(habit =>
-                            <div key={ 'habit-list-' + habit.id }>
+                            <Col key={ 'habit-list-' + habit.id }>
                                 <div className="habit-info">
                                     {
                                         habit.id + '  ' + habit.createDate
@@ -106,13 +51,13 @@ class List extends Component {
                                 </div>
 
                                 <div className={ "habit-box" }>
-                                    <Calendar selectedDates={ [] }  />
+                                    <Calendar selectedDates={ [] } />
                                 </div>
 
-                            </div>
+                            </Col>
                         )
                     }
-                </div>
+                </Row>
             </div>
         )
     }

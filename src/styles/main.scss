@@ -1,4 +1,8 @@
 
+$fontSize: 14;
+$ratio: 1 / 7;
+$ratioPercentage: percentage($ratio);
+$mainColor: #108ee9;
 
 * {
   box-sizing: border-box;
@@ -17,9 +21,18 @@ body {
   width: 0;
 }
 
+input:focus,
+input:active {
+  outline: none;
+}
+
 #qwe {
   .root {
     @import "./components/calendar";
+    @import "./components/header";
+    @import "./components/createHabit";
+
+    @import "./pages/app";
     @import "./pages/list";
   }
 }
