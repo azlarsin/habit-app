@@ -91,3 +91,13 @@ export function uuid() {
 function s4() {
 	return Math.floor((1 + Math.random()) * 0x10000);
 }
+
+// check type
+export function is(v, type) {
+    if(typeof type === 'function') {
+        return v instanceof type && v.constructor === type;
+    }
+
+    let t = Object.prototype.toString.call(v).split(' ')[1].slice(0, -1);
+    return !type ? t : t.toLowerCase() === type.toLowerCase();
+}

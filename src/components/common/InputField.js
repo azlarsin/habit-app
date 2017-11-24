@@ -5,6 +5,12 @@
  */
 
 import React from 'react';
+import { createPortal, findDOMNode, render }  from 'react-dom';
+
+
+import Popup from '@/components/common/Popup';
+import { is, uuid } from '@/utils/Utils';
+
 
 class InputField extends React.Component {
     constructor(props) {
@@ -15,12 +21,21 @@ class InputField extends React.Component {
         };
     }
 
+    componentDidMount() {
+
+    }
+
+    componentWillUnmount() {
+
+    }
+
     render() {
-        let { value, onChange, holder, placeHolder } = this.props;
+        let { value, onChange, holder, placeHolder, select, options } = this.props;
         holder = holder || placeHolder || "";
+        options = is(options, Array) ? options : [];
 
         return (
-            <div className='input-field'>
+            <div className='input-field' ref="root">
                 <input
                     value={ value }
                     onChange={ onChange }
@@ -34,6 +49,28 @@ class InputField extends React.Component {
                 <div className={ 'holder' + ((this.state.focused || !!value.trim()) ? ' active' : "")}>
                     { holder }
                 </div>
+
+                {
+                    select ?
+                        <Popup
+                            getRootDOMNode={ () => findDOMNode(this) }
+                            className={ "select-list"}
+                            visible={ !!this.state.focused }
+                        >
+                            {
+                                options && options.map(option =>
+                                    <div
+                                        key={ 'input-field-selector-option-' + uuid() }
+                                        className={ value === option ? "selected" : "" }
+                                    >
+                                        { option }
+                                    </div>
+                                )
+                            }
+                        </Popup>
+                        :
+                        null
+                }
             </div>
         )
     }

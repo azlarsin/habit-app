@@ -46,7 +46,6 @@
 
       padding: 1px .5em;
     }
-
     > input:focus,
     > input:active {
       border-bottom-color: #108ee9;
@@ -62,12 +61,24 @@
       transform-origin: 0 0 0;
       transition: transform .2s, color .2s;
     }
-
-    .holder.active {
+    > .holder.active {
       transform: translateY(0) translateX(-.5em) scale(.7);
 
       //color: rgba(0,0,0, .5);
       color: #108ee9;
+    }
+
+    > .select-list {
+      display: flex;
+      flex-direction: column;
+      background-color: rgba(255, 255,255, .8);
+
+      //height: 0;
+      //overflow: hidden;
+    }
+
+    > .select-list {
+
     }
   }
 }

@@ -74,21 +74,41 @@ class CreateHabit extends React.Component {
                     为你的习惯选取一个好名字
                 </h3>
 
-                <InputField
-                    value={ this.state.name }
-                    onChange={ this.setValue.bind(this, "name") }
-                    holder={ "请输入 40 字以内" }
-                />
+                <div>
+                    <InputField
+                        value={ this.state.name }
+                        onChange={ this.setValue.bind(this, "name") }
+                        holder={ "请输入 40 字以内" }
+
+                        testDom={this}
+                    />
+                </div>
             </div>,
             <div>
                 <h3>
                     为它设置一些其他属性
                 </h3>
+
+                <div>
+                    <InputField
+                        value={ this.state.label }
+                        onChange={ this.setValue.bind(this, "label") }
+                        holder={ "选择或输入一个" }
+                        options={ ['锻炼', '生活', '人生'] }
+                        select
+                    />
+                </div>
             </div>,
             <div>
                 <h3>
                     说一句鼓励自己的话
                 </h3>
+
+                <InputField
+                    value={ this.state.note }
+                    onChange={ this.setValue.bind(this, "note") }
+                    holder={ "请输入 40 字以内" }
+                />
             </div>,
             <div>
                 <h3>
@@ -110,7 +130,7 @@ class CreateHabit extends React.Component {
                             new Array(4).fill(null).map((v, index) => <Step key={ 'create-habit-step-title-' + index } title={ 'Step ' + (index + 1) } />)
                         }
                     </Steps>
-                    <div className="steps-content">{ contents[current] }</div>
+                    <div className="steps-content" key={ 'create-habit-step-content-' + current }>{ contents[current] }</div>
                 </div>
                 <div className="steps-action">
                     {

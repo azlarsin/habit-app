@@ -27,7 +27,6 @@
 
   > section:first-child {
     padding: 15px;
-    border-bottom: 1px solid #eee
   }
 
   .current-week {
@@ -48,6 +47,7 @@
     transition-delay: 0s;
 
     &.show-date {
+      border-top: 1px solid #eee;
       height: 41px;
       color: inherit;
       user-select: initial;
