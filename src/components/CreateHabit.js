@@ -61,9 +61,9 @@ class CreateHabit extends React.Component {
         return !val;
     }
 
-    setValue(type, e) {
+    setValue(type, value) {
         this.setState({
-            [type]: e.target.value.trim()
+            [type]: value
         });
     }
 
@@ -94,7 +94,7 @@ class CreateHabit extends React.Component {
                         value={ this.state.label }
                         onChange={ this.setValue.bind(this, "label") }
                         holder={ "选择或输入一个" }
-                        options={ ['锻炼', '生活', '人生'] }
+                        options={ ['锻炼', '生活', '人生', 'Something else...', '锻炼1', '生活1', '人生1', 'Something else...1', '锻炼2', '生活2', '人生2', 'Something else...2'] }
                         select
                     />
                 </div>

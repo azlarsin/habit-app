@@ -1,0 +1,39 @@
+
+
+.popup {
+  z-index: 100;
+
+  ul {
+    outline: none;
+    position: relative;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.2);
+    background-clip: padding-box;
+
+    li {
+      padding: 7px 8px;
+      margin: 0;
+      clear: both;
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(0,0,0,.65);
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all .3s;
+    }
+
+    li:hover,
+    li.hovered {
+      background-color: #ecf6fd;
+    }
+
+    li.selected {
+      background-color: #f7f7f7;
+    }
+  }
+}

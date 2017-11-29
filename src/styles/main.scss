@@ -17,8 +17,8 @@ body {
 }
 
 ::-webkit-scrollbar {
-  display: none;
-  width: 0;
+  //display: none;
+  //width: 0;
 }
 
 input:focus,
@@ -26,13 +26,16 @@ input:active {
   outline: none;
 }
 
-#qwe {
-  .root {
+//#qwe {
+//  .root {
     @import "./components/calendar";
     @import "./components/header";
     @import "./components/createHabit";
 
     @import "./pages/app";
     @import "./pages/list";
-  }
-}
+  //}
+//}
+
+// components like popup
+@import "./components/popup";

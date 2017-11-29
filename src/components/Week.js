@@ -13,9 +13,12 @@ class Week extends React.Component {
 	constructor(props) {
 		super(props);
 
+		let d = new Date();
+        d.setHours(0,0,0,0); // last midnight
+
 		this.state = {
 			dates: getDatesByWeek(),
-			today: new Date().getDate()
+			today: d
 		};
 
 		this.toggleClassTimeout = null;
@@ -54,10 +57,10 @@ class Week extends React.Component {
 					WEEK.map((day, index) =>
 						<div
 							key={ "week-tab-" + uuid() }
-							className={ this.state.dates[index].date < this.state.today ?
+							className={ new Date(this.state.dates[index].fullDate) < this.state.today ?
 								"passed"
 								:
-								(this.state.dates[index].date === this.state.today ? "current" : "")
+								(this.state.dates[index].date === this.state.today.getDate() ? "current" : "")
 							}
 						>
 							<div>{ day }</div>

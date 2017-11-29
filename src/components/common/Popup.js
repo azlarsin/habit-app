@@ -7,6 +7,24 @@
 import React from 'react';
 import Proptypes from 'prop-types';
 import { createPortal, findDOMNode, render }  from 'react-dom';
+import { Transition } from 'react-transition-group';
+
+
+const defaultStyle = {
+    transition: `all 200ms`,
+    transformOrigin: '0 0 0',
+    opacity: 0,
+    height: 0,
+    visibility: 'hidden',
+    overflow: 'hidden'
+};
+
+const transitionStyles = {
+    entering: { opacity: 0, transform: 'scaleY(.8)', visibility: 'hidden', height: 0, overflow: 'hidden'},
+    entered: { opacity: 1, transform: 'scaleY(1)', visibility: 'visible', height: 300, overflow: 'auto'},
+    exiting: { opacity: 1, transform: 'scaleY(1)', visibility: 'visible', height: 300, overflow: 'auto', transitionDelay: '100ms'},
+    exited: { opacity: 0, transform: 'scaleY(.8)', visibility: 'hidden', height: 0, overflow: 'hidden'},
+};
 
 class Popup extends React.Component {
     constructor(props) {
@@ -25,13 +43,13 @@ class Popup extends React.Component {
         let dom = this.props.getRootDOMNode();
         let rect = dom.getBoundingClientRect();
 
-        console.log(rect);
-
         this.setState({
             style: {
                 ...this.state.style,
                 top: rect.top + rect.height,
-                left: rect.left
+                left: rect.left,
+                width: rect.width,
+                maxHeight: 300
             }
         });
     }
@@ -40,11 +58,28 @@ class Popup extends React.Component {
         let { children, mountDom, visible, className } = this.props;
         mountDom = mountDom || document.body;
 
-        if(!visible) {
-            return null;
-        }
+        // if(!visible) {
+        //     return null;
+        // }
 
-        return createPortal(<div className={ "popup " + className } style={ this.state.style }>{ children }</div>, mountDom)
+        let style = this.state.style;
+
+        return createPortal(
+            <Transition in={visible} timeout={300} >
+                {(state) => (
+                    <div
+                        className={ "popup " + className }
+                        style={{
+                            ...style,
+                            ...defaultStyle,
+                            ...transitionStyles[state]
+                        }}
+                    >
+                        { children }
+                    </div>
+                )}
+            </Transition>,
+        mountDom);
     }
 }
 
