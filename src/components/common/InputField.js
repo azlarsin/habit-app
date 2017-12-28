@@ -20,7 +20,8 @@ class InputField extends React.Component {
             focused: false,
             options: is(options, Array) ? options : [],
             targetLiIndex: 0,
-            showSelect: true
+            showSelect: true,
+            ulUuid: uuid()
         };
 
         this.options = this.state.options;
@@ -42,8 +43,15 @@ class InputField extends React.Component {
     handleListClick(e) {
         // e.preventDefault();
         if(e.target.tagName === 'LI') {
+            console.log(e.target.innerText);
 
-            this.handleInputChange(e.target.innerText || '', true);
+            this.setState({
+                showSelect: false,
+                targetLiIndex: parseInt(e.target.getAttribute('data-index'))
+            }, () => {
+                this.handleInputChange(this.state.options[this.state.targetLiIndex] || '', true);
+            });
+
         }
     }
 
@@ -82,14 +90,16 @@ class InputField extends React.Component {
     handleInputChange(value, clear = false) {
         let { onChange } = this.props;
 
-        // console.log(value);
-
-        let newOptions = this.options.filter(option => {
-            return option.indexOf(value) !== -1;
-            // return new RegExp(value).test(option);   // '.' may failed
-        });
+        let newOptions = clear === true ?
+            this.state.options
+            :
+            this.options.filter(option => {
+                return option.indexOf(value) !== -1;
+                // return new RegExp(value).test(option);   // '.' may fail
+            });
 
         onChange(value);
+
         this.setState({
             options: newOptions,
             showSelect: !clear,
@@ -109,10 +119,10 @@ class InputField extends React.Component {
                     onFocus={ () => {
                         this.setState({ focused: true }, () => {
                             this.handleInputChange(value)
-                        })
+                        });
                     } }
                     onBlur={ () => {
-                        this.setState({ focused: false })
+                        this.setState({ focused: false });
                     } }
                     onKeyDown={ this.handleKeyDown }
                 />
@@ -130,11 +140,12 @@ class InputField extends React.Component {
                             <ul
                                 onMouseDown={ this.handleListClick }
                                 onMouseOver={ this.handleListHover }
+                                key={ 'input-field-selector-' + this.state.ulUuid }
                             >
                             {
                                 this.state.options.map((option, index) =>
                                     <li
-                                        key={ 'input-field-selector-option-' + uuid() }
+                                        key={ 'input-field-selector-option-' + index }
                                         className={ value === option ? 'selected' : (this.state.targetLiIndex === index ? ' hovered' : "") }
                                         data-index={ index }
                                     >

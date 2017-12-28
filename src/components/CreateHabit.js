@@ -38,6 +38,8 @@ class CreateHabit extends React.Component {
             endDate: null,
             note: ''
         };
+
+        this.saveData = this.saveData.bind(this);
     }
     next() {
         const current = this.state.current + 1;
@@ -52,8 +54,8 @@ class CreateHabit extends React.Component {
         let fields = [
             'name',
             'label',
-            'endDate',
-            'note'
+            'note',
+            'endDate'
         ];
 
         let val = this.state[fields[this.state.current]];
@@ -65,6 +67,10 @@ class CreateHabit extends React.Component {
         this.setState({
             [type]: value
         });
+    }
+
+    saveData() {
+        console.log('xxx');
     }
 
     getContents() {
@@ -114,6 +120,12 @@ class CreateHabit extends React.Component {
                 <h3>
                     最后，立一个预计的目标吧
                 </h3>
+
+                <InputField
+                    value={ this.state.note }
+                    onChange={ this.setValue.bind(this, "note") }
+                    holder={ "请输入 40 字以内" }
+                />
             </div>
         ];
     }
@@ -146,7 +158,7 @@ class CreateHabit extends React.Component {
                     {
                         this.state.current === steps.length - 1
                         &&
-                        <Button type="primary" onClick={() => alert('Processing complete!')}>Done</Button>
+                        <Button type="primary" onClick={this.saveData}>Done</Button>
                     }
                 </div>
             </div>

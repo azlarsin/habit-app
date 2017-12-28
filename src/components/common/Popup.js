@@ -14,16 +14,16 @@ const defaultStyle = {
     transition: `all 200ms`,
     transformOrigin: '0 0 0',
     opacity: 0,
-    height: 0,
+    // height: 0,
     visibility: 'hidden',
     overflow: 'hidden'
 };
 
 const transitionStyles = {
-    entering: { opacity: 0, transform: 'scaleY(.8)', visibility: 'hidden', height: 0, overflow: 'hidden'},
-    entered: { opacity: 1, transform: 'scaleY(1)', visibility: 'visible', height: 300, overflow: 'auto'},
-    exiting: { opacity: 1, transform: 'scaleY(1)', visibility: 'visible', height: 300, overflow: 'auto', transitionDelay: '100ms'},
-    exited: { opacity: 0, transform: 'scaleY(.8)', visibility: 'hidden', height: 0, overflow: 'hidden'},
+    entering: { opacity: 0, transform: 'scaleY(.8)', visibility: 'hidden', overflow: 'hidden'},
+    entered: { opacity: 1, transform: 'none', visibility: 'visible', overflow: 'auto'},
+    exiting: { opacity: 1, transform: 'scaleY(1)', visibility: 'visible', overflow: 'auto', transitionDelay: '100ms'},
+    exited: { opacity: 0, transform: 'scaleY(.8)', visibility: 'hidden', overflow: 'hidden'},
 };
 
 class Popup extends React.Component {
@@ -55,8 +55,9 @@ class Popup extends React.Component {
     }
 
     render() {
-        let { children, mountDom, visible, className } = this.props;
+        let { children, mountDom, visible, className, overlayClick } = this.props;
         mountDom = mountDom || document.body;
+        overlayClick = overlayClick || (() => {});
 
         // if(!visible) {
         //     return null;
@@ -75,6 +76,7 @@ class Popup extends React.Component {
                             ...transitionStyles[state]
                         }}
                     >
+                        <div className={ 'overlay' } onClick={ overlayClick } />
                         { children }
                     </div>
                 )}
