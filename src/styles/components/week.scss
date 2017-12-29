@@ -1,0 +1,45 @@
+.current-week {
+    width: 100%;
+    bottom: 0;
+    left: 0;
+
+    font-size: 12px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    overflow: hidden;
+    height: 5px;
+    // border-top: 1px solid transparent;
+    transition: all .2s;
+    color: transparent;
+    user-select: none;
+    transition-delay: 0s;
+
+    line-height: normal;
+
+    &.show-date {
+      border-top: 1px solid #eee;
+      height: 41px;
+      color: inherit;
+      user-select: initial;
+      transition-delay: .2s;
+    }
+
+    > div {
+      flex-basis: $ratioPercentage;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    > div.passed {
+      border-bottom: 5px solid $mainColor;
+    }
+
+    > div.current {
+      background-color: $mainColor;
+      color: #fff;
+    }
+  }

@@ -17,8 +17,8 @@ body {
 }
 
 ::-webkit-scrollbar {
-  //display: none;
-  //width: 0;
+  display: none;
+  width: 0;
 }
 
 input:focus,
@@ -29,6 +29,7 @@ input:active {
 //#qwe {
 //  .root {
     @import "./components/calendar";
+    @import "./components/week";
     @import "./components/header";
     @import "./components/createHabit";
 

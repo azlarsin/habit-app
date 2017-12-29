@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { Row, Col } from 'antd';
 
 import Calendar  from "@/components/Calendar";
+import Week  from "@/components/Week";
 
 class List extends Component {
     constructor(props) {
@@ -45,15 +46,19 @@ class List extends Component {
                         this.state.habits.map(habit =>
                             <Col key={ 'habit-list-' + habit.id }>
                                 <div className="habit-info">
-                                    {
-                                        habit.id + '  ' + habit.createDate
-                                    }
+                                    <div>
+                                        { habit.name }
+                                    </div>
+                                    <div>
+                                        { habit.createDate }
+                                    </div>
+
+                                    <Week disableHover customDates={ habit.dates } />
                                 </div>
 
                                 <div className={ "habit-box" }>
-                                    <Calendar selectedDates={ [] } />
+                                    <Calendar selectedDates={ habit.dates } />
                                 </div>
-
                             </Col>
                         )
                     }

@@ -3,6 +3,23 @@
 .create-habit {
   display: flex;
   flex-direction: column;
+  box-shadow: 0 0 5px 1px rgba(0,0,0, 0.2);
+  padding: 20px 25px;
+  position: relative;
+  transition: all 1s;
+
+  > .close {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    padding: 2px;
+    border: none;
+  }
 
   > div {
     display: flex;
@@ -11,6 +28,10 @@
 
     justify-content: center;
     align-items: center;
+  }
+
+  .ant-steps {
+    width: auto;
   }
 
   .steps-content {
@@ -79,4 +100,10 @@
       //overflow: hidden;
     }
   }
+}
+
+.create-habit.close {
+  transform: translateX(100%);
+  visibility: hidden;
+  opacity: 0;
 }

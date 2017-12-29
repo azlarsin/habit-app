@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import Prototypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { message as MSG } from 'antd';
 
 import List from "@/pages/List";
@@ -21,7 +21,8 @@ class App extends React.Component {
 
         this.state = {
             habits: [],
-            loading: true
+            loading: true,
+            creating: false
         };
 
         this.addHabit = this.addHabit.bind(this);
@@ -31,14 +32,15 @@ class App extends React.Component {
     }
 
     componentWillMount() {
-        // todo: fetch habits
-
+        // todo: fetch habits from db
         let { habitAppData } = localStorage;
+        let habits = habitAppData ? JSON.parse(habitAppData) :[];
 
         this.setState({
-            habits: habitAppData ? JSON.parse(habitAppData) :[],
-            loading: false
-        })
+            habits: habits,
+            loading: false,
+            creating: habits.length === 0
+        });
     }
 
     getChildContext() {
@@ -56,6 +58,7 @@ class App extends React.Component {
         let state = this.state;
 
         let { habits } = state;
+        console.log(habits);
 
         localStorage.habitAppData = JSON.stringify(habits);
 
@@ -72,20 +75,29 @@ class App extends React.Component {
         return events[eventName];
     }
 
-    addHabit() {
-        let newHabit = {
-            id: "habit-" + uuid(),
-            name: '',
-            createDate: getToday()
-        };
+    addHabit(habit = null) {
+        if (habit) {
+            let newHabit = {
+                id: "habit-" + uuid(),
+                name: '',
+                createDate: getToday(),
+                dates: [],
+                ...habit
+            };
 
-        let habits = this.state.habits;
-        habits.push(newHabit);
+            let habits = this.state.habits;
+            habits.push(newHabit);
 
-        this.saveState({
-            habits: habits
-        }, () => {
-            // MSG.success('创建成功!', 3);
+            this.saveState({
+                habits: habits,
+                creating: false
+            }, () => {
+                MSG.success('创建成功!', 3);
+            });
+        }
+
+        this.setState({
+            creating: !habit
         });
     }
 
@@ -99,7 +111,16 @@ class App extends React.Component {
                         this.state.habits.length > 0 ?
                             <List habits={ this.state.habits } />
                             :
-                            <CreateHabit />
+                            null
+                    }
+
+                    {
+                        this.state.creating ? 
+                            <CreateHabit close={ () => {
+                                this.setState({creating: !this.state.creating})
+                            } }/>
+                            :
+                            null
                     }
                 </div>
             </div>
@@ -108,8 +129,8 @@ class App extends React.Component {
 }
 
 App.childContextTypes = {
-    config: Prototypes.object,
-    getEvent: Prototypes.func
+    config: PropTypes.object,
+    getEvent: PropTypes.func
 };
 
 export default App;

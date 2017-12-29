@@ -5,11 +5,10 @@
  */
 
 import React from 'react';
-import Prototypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Affix, Button } from 'antd';
 
 import Week from '@/components/Week';
-
 
 class Header extends React.Component {
 	constructor(props) {
@@ -39,7 +38,7 @@ class Header extends React.Component {
 						<h1>Create your habit!</h1>
 
 						<Button
-                            onClick={ addHabit }
+                            onClick={ () => { addHabit() } }
                             type="primary"
                             icon="plus"
                             shape="circle"
@@ -55,8 +54,8 @@ class Header extends React.Component {
 }
 
 Header.contextTypes = {
-    config: Prototypes.object,
-    getEvent: Prototypes.func
+    config: PropTypes.object,
+    getEvent: PropTypes.func
 };
 
 export default Header;

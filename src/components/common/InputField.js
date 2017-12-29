@@ -31,20 +31,10 @@ class InputField extends React.Component {
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
-
-    componentDidMount() {
-
-    }
-
-    componentWillUnmount() {
-
-    }
-
+    
     handleListClick(e) {
         // e.preventDefault();
         if(e.target.tagName === 'LI') {
-            console.log(e.target.innerText);
-
             this.setState({
                 showSelect: false,
                 targetLiIndex: parseInt(e.target.getAttribute('data-index'))

@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Steps, Button, Input } from 'antd';
 
 import InputField from '@/components/common/InputField';
@@ -70,7 +71,9 @@ class CreateHabit extends React.Component {
     }
 
     saveData() {
-        console.log('xxx');
+        let addHabit = this.context.getEvent("addHabit");
+
+        addHabit && addHabit({...this.state})
     }
 
     getContents() {
@@ -85,8 +88,6 @@ class CreateHabit extends React.Component {
                         value={ this.state.name }
                         onChange={ this.setValue.bind(this, "name") }
                         holder={ "请输入 40 字以内" }
-
-                        testDom={this}
                     />
                 </div>
             </div>,
@@ -133,9 +134,14 @@ class CreateHabit extends React.Component {
     render() {
         const { current } = this.state;
         const contents = this.getContents();
-
+        
         return (
             <div className="create-habit">
+                <Button className="close" onClick={() => { this.props.close() }}>
+                    <svg width="15" height="15" viewBox="0 0 20 20">
+                        <path d="M0 0 L20 20 M20 0 L0 20" stroke="rgba(0,0, 255, .3)" fill="none" />
+                    </svg>
+                </Button>
                 <div>
                     <Steps current={current} direction={'vertical'}>
                         {
@@ -165,5 +171,9 @@ class CreateHabit extends React.Component {
         );
     }
 }
+
+CreateHabit.contextTypes = {
+    getEvent: PropTypes.func
+};
 
 export default CreateHabit;

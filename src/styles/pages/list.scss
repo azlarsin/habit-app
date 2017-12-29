@@ -9,6 +9,8 @@
       background-color: rgba(0, 0, 255, 0.2);
       min-height: 50px;
       line-height: 50px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 3px 0px rgba(0,0, 0, .3);
     }
 
     .habit-box {
@@ -40,7 +42,7 @@
       visibility: visible;
       height: 570px;
       opacity: 1;
-      border: 20px solid transparent;
+      // border: 20px solid transparent;
 
       > div {
         transform: scaleY(1) translateX(-50%);

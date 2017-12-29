@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import Prototypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { WEEK, getDatesByWeek, uuid } from "@/utils/Utils";
 
@@ -29,7 +29,7 @@ class Week extends React.Component {
 
     handleMouseEnter(e) {
 	    if(!this.props.date) {
-            clearTimeout(this.toggleClassTimeout);
+			clearTimeout(this.toggleClassTimeout);
             e.currentTarget.classList.add('show-date');
         }
     }
@@ -45,22 +45,25 @@ class Week extends React.Component {
     }
 
 	render() {
-	    let showDate = this.props.showDate || false;
+	    const showDate = this.props.showDate || false;
+		const disableHover = this.props.disableHover;
+		const customDates = this.props.customDates || [];
 
 		return (
 			<div
                 className={ "current-week" + (showDate ? " show-date" : "") }
-                onMouseEnter={ this.handleMouseEnter }
-                onMouseLeave={ this.handleMouseLeave }
+                onMouseEnter={ disableHover ? () => {} : this.handleMouseEnter }
+                onMouseLeave={ disableHover ? () => {} : this.handleMouseLeave }
             >
 				{
 					WEEK.map((day, index) =>
 						<div
 							key={ "week-tab-" + uuid() }
-							className={ new Date(this.state.dates[index].fullDate) < this.state.today ?
-								"passed"
-								:
-								(this.state.dates[index].date === this.state.today.getDate() ? "current" : "")
+							className={
+								new Date(this.state.dates[index].fullDate) < this.state.today ?
+									"passed"
+									:
+									(this.state.dates[index].date === this.state.today.getDate() ? "current" : "")
 							}
 						>
 							<div>{ day }</div>
@@ -75,12 +78,11 @@ class Week extends React.Component {
 }
 
 Week.contextTypes = {
-    config: Prototypes.object
+    config: PropTypes.object
 };
 
 Week.propTypes = {
-    showDate: Prototypes.bool,
-
+    showDate: PropTypes.bool
 };
 
 export default Week;

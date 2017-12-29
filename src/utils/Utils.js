@@ -101,3 +101,7 @@ export function is(v, type) {
     let t = Object.prototype.toString.call(v).split(' ')[1].slice(0, -1);
     return !type ? t : t.toLowerCase() === type.toLowerCase();
 }
+
+export const saveDate = (key, v) => {
+    
+};

@@ -30,7 +30,10 @@ module.exports = {
             "react",
             "react-dom",
             "react-router",
-            "babel-regenerator-runtime"
+            // "react-router-dom",
+            "babel-regenerator-runtime",
+            // "antd",
+            // "react-transition-group"
         ],
         app: [
             'react-hot-loader/patch',
@@ -117,9 +120,9 @@ module.exports = {
         ]
     },
 
-    devServer: {
-        hot: true
-    },
+    // devServer: {
+    //     hot: true
+    // },
 
     plugins: [
         new webpack.DefinePlugin({

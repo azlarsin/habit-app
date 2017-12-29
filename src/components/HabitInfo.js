@@ -5,13 +5,11 @@
  */
 
 import React from 'react';
-
-
+import Week from '@/components/Week';
 
 class HabitInfo extends React.Component {
 	constructor(props) {
 		super(props);
-
 	}
 
 	render() {
@@ -41,4 +39,4 @@ class HabitInfo extends React.Component {
 	}
 }
 
-export default
+export default HabitInfo;
