@@ -34,7 +34,7 @@ class InputField extends React.Component {
     
     handleListClick(e) {
         // e.preventDefault();
-        if(e.target.tagName === 'LI') {
+        if (e.target.tagName === 'LI') {
             this.setState({
                 showSelect: false,
                 targetLiIndex: parseInt(e.target.getAttribute('data-index'))
@@ -46,7 +46,7 @@ class InputField extends React.Component {
     }
 
     handleListHover(e) {
-        if(e.target.tagName === 'LI') {
+        if (e.target.tagName === 'LI') {
             this.setState({
                 targetLiIndex: parseInt(e.target.getAttribute('data-index'))
             });

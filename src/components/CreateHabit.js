@@ -5,8 +5,9 @@
  */
 
 import React from 'react';
+import {findDOMNode} from 'react-dom';
 import PropTypes from 'prop-types';
-import { Steps, Button, Input } from 'antd';
+import { Modal, Steps, Button, Input, message as Msg } from 'antd';
 
 import InputField from '@/components/common/InputField';
 
@@ -42,13 +43,24 @@ class CreateHabit extends React.Component {
 
         this.saveData = this.saveData.bind(this);
     }
+    componentDidMount () {
+        let dom = findDOMNode(this);
+        console.log(dom);
+    }
+
     next() {
         const current = this.state.current + 1;
         this.setState({ current });
     }
     prev() {
-        const current = this.state.current - 1;
-        this.setState({ current });
+        console.log(this.state.current);
+        if (this.state.current > 1) {
+            const current = this.state.current - 1;
+            this.setState({ current });
+        }
+        else {
+            Msg.warning('前面没有内容了');
+        }
     }
 
     validate() {
@@ -136,38 +148,46 @@ class CreateHabit extends React.Component {
         const contents = this.getContents();
         
         return (
-            <div className="create-habit">
-                <Button className="close" onClick={() => { this.props.close() }}>
-                    <svg width="15" height="15" viewBox="0 0 20 20">
-                        <path d="M0 0 L20 20 M20 0 L0 20" stroke="rgba(0,0, 255, .3)" fill="none" />
-                    </svg>
-                </Button>
-                <div>
-                    <Steps current={current} direction={'vertical'}>
+            <Modal 
+                visible={ true }
+                width={ '72vw' }
+                onCancel={ () => this.prev() }
+                cancelText={ this.state.current <= 0 ? 'Cancel' : 'Previous' }
+                onOk={ this.state.current < steps.length - 1 ? () => this.next() : this.saveData }
+                okText={ this.state.current < steps.length - 1 ? 'Next' : 'Done' }
+                zIndex={ 99 }
+                closable={ false }
+                maskClosable={ false }
+                ref="create-habit-modal"
+            >
+                <div className="create-habit">
+                    <div>
+                        <Steps current={current} direction={'vertical'} size="small">
+                            {
+                                new Array(4).fill(null).map((v, index) => <Step key={ 'create-habit-step-title-' + index } title={ 'Step ' + (index + 1) } />)
+                            }
+                        </Steps>
+                        <div className="steps-content" key={ 'create-habit-step-content-' + current }>{ contents[current] }</div>
+                    </div>
+                    <div className="steps-action">
                         {
-                            new Array(4).fill(null).map((v, index) => <Step key={ 'create-habit-step-title-' + index } title={ 'Step ' + (index + 1) } />)
+                            <Button onClick={() => this.prev()} disabled={ this.state.current <= 0 } >
+                                Previous
+                            </Button>
                         }
-                    </Steps>
-                    <div className="steps-content" key={ 'create-habit-step-content-' + current }>{ contents[current] }</div>
+                        {
+                            this.state.current < steps.length - 1
+                            &&
+                            <Button type="primary" disabled={ this.validate() } onClick={() => this.next()}>Next</Button>
+                        }
+                        {
+                            this.state.current === steps.length - 1
+                            &&
+                            <Button type="primary" onClick={this.saveData}>Done</Button>
+                        }
+                    </div>
                 </div>
-                <div className="steps-action">
-                    {
-                        <Button onClick={() => this.prev()} disabled={ this.state.current <= 0 } >
-                            Previous
-                        </Button>
-                    }
-                    {
-                        this.state.current < steps.length - 1
-                        &&
-                        <Button type="primary" disabled={ this.validate() } onClick={() => this.next()}>Next</Button>
-                    }
-                    {
-                        this.state.current === steps.length - 1
-                        &&
-                        <Button type="primary" onClick={this.saveData}>Done</Button>
-                    }
-                </div>
-            </div>
+            </Modal>
         );
     }
 }

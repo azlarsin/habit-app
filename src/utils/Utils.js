@@ -62,7 +62,7 @@ export const getDatesByMonth = (year, month) => {
 };
 
 export const getDetailDateByDate = (d, separator = '-') => {
-    if(d instanceof Date) {
+    if (d instanceof Date) {
         let month = d.getMonth() + 1,
             date = d.getDate();
 
@@ -94,7 +94,7 @@ function s4() {
 
 // check type
 export function is(v, type) {
-    if(typeof type === 'function') {
+    if (typeof type === 'function') {
         return v instanceof type && v.constructor === type;
     }
 

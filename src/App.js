@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import { message as MSG } from 'antd';
 
@@ -62,7 +63,7 @@ class App extends React.Component {
 
         localStorage.habitAppData = JSON.stringify(habits);
 
-        if(cb && typeof cb === 'function') {
+        if (cb && typeof cb === 'function') {
             cb();
         }
     }

@@ -9,7 +9,6 @@ import Proptypes from 'prop-types';
 import { createPortal, findDOMNode, render }  from 'react-dom';
 import { Transition } from 'react-transition-group';
 
-
 const defaultStyle = {
     transition: `all 200ms`,
     transformOrigin: '0 0 0',
@@ -59,7 +58,7 @@ class Popup extends React.Component {
         mountDom = mountDom || document.body;
         overlayClick = overlayClick || (() => {});
 
-        // if(!visible) {
+        // if (!visible) {
         //     return null;
         // }
 

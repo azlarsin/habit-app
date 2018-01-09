@@ -20,15 +20,13 @@ class List extends Component {
     }
 
     toggleHabitBox(e) {
-        if(e.target.classList.contains("habit-info")) {
-            let box = e.target.nextSibling;
+        let box = e.currentTarget.nextSibling;
 
-            box.classList.toggle("open");
-        }
+        box && box.classList.toggle("open");
     }
 
     render() {
-        if(!this.props.habits) {
+        if (!this.props.habits) {
             return (
                 <div>
                     Loading...
@@ -38,14 +36,14 @@ class List extends Component {
 
         return (
             <div className="list">
-                <Row
-                    className="habits"
-                    onClick={ this.toggleHabitBox }
-                >
+                <Row className="habits">
                     {
                         this.state.habits.map(habit =>
                             <Col key={ 'habit-list-' + habit.id }>
-                                <div className="habit-info">
+                                <div 
+                                    className="habit-info"
+                                    onClick={ this.toggleHabitBox }
+                                >
                                     <div>
                                         { habit.name }
                                     </div>
@@ -53,7 +51,7 @@ class List extends Component {
                                         { habit.createDate }
                                     </div>
 
-                                    <Week disableHover customDates={ habit.dates } />
+                                    <Week disableHover customDates={ ['2017-12-29'] } />
                                 </div>
 
                                 <div className={ "habit-box" }>

@@ -29,7 +29,7 @@ class Calendar extends Component {
     handleDateClick(e) {
         let dom = e.target;
 
-        if(dom.classList.contains("date")) {
+        if (dom.classList.contains("date")) {
             let date = dom.getAttribute("data-date");
 
             console.log(this.state.year + '-' + this.state.month + '-' + date);
@@ -41,7 +41,7 @@ class Calendar extends Component {
         let month = this.state.month;
 
         if (type === 'next') {
-            if(month === 12) {
+            if (month === 12) {
                 year++;
                 month = 1;
             }else {
@@ -50,7 +50,7 @@ class Calendar extends Component {
         }
 
         if (type === 'prev') {
-            if(month === 1) {
+            if (month === 1) {
                 year--;
                 month = 12;
             }else {

@@ -28,7 +28,7 @@ class Week extends React.Component {
 	}
 
     handleMouseEnter(e) {
-	    if(!this.props.date) {
+	    if (!this.props.date) {
 			clearTimeout(this.toggleClassTimeout);
             e.currentTarget.classList.add('show-date');
         }
@@ -36,7 +36,7 @@ class Week extends React.Component {
 
     handleMouseLeave(e) {
         e.persist();
-        if(!this.props.date) {
+        if (!this.props.date) {
             let target = e.currentTarget;
             this.toggleClassTimeout = setTimeout(() => {
                 target.classList.remove('show-date');
@@ -48,6 +48,11 @@ class Week extends React.Component {
 	    const showDate = this.props.showDate || false;
 		const disableHover = this.props.disableHover;
 		const customDates = this.props.customDates || [];
+		let current = true;
+
+		if (customDates.length > 0) {
+			current = false;
+		}
 
 		return (
 			<div
@@ -60,10 +65,17 @@ class Week extends React.Component {
 						<div
 							key={ "week-tab-" + uuid() }
 							className={
-								new Date(this.state.dates[index].fullDate) < this.state.today ?
+								current ?
+								(
+									new Date(this.state.dates[index].fullDate) < this.state.today ?
 									"passed"
 									:
 									(this.state.dates[index].date === this.state.today.getDate() ? "current" : "")
+								)
+								:
+								(
+									customDates.indexOf(this.state.dates[index].fullDate) !== -1 ? "passed" : ""
+								)
 							}
 						>
 							<div>{ day }</div>

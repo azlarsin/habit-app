@@ -7,21 +7,21 @@
 /******/ 		var moduleId, chunkId, i = 0, resolves = [], result;
 /******/ 		for(;i < chunkIds.length; i++) {
 /******/ 			chunkId = chunkIds[i];
-/******/ 			if(installedChunks[chunkId]) {
+/******/ 			if (installedChunks[chunkId]) {
 /******/ 				resolves.push(installedChunks[chunkId][0]);
 /******/ 			}
 /******/ 			installedChunks[chunkId] = 0;
 /******/ 		}
 /******/ 		for(moduleId in moreModules) {
-/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 			if (Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
 /******/ 				modules[moduleId] = moreModules[moduleId];
 /******/ 			}
 /******/ 		}
-/******/ 		if(parentJsonpFunction) parentJsonpFunction(chunkIds, moreModules, executeModules);
+/******/ 		if (parentJsonpFunction) parentJsonpFunction(chunkIds, moreModules, executeModules);
 /******/ 		while(resolves.length) {
 /******/ 			resolves.shift()();
 /******/ 		}
-/******/ 		if(executeModules) {
+/******/ 		if (executeModules) {
 /******/ 			for(i=0; i < executeModules.length; i++) {
 /******/ 				result = __webpack_require__(__webpack_require__.s = executeModules[i]);
 /******/ 			}
@@ -41,7 +41,7 @@
 /******/ 	function __webpack_require__(moduleId) {
 /******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
+/******/ 		if (installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
@@ -65,12 +65,12 @@
 /******/ 	// The chunk loading function for additional chunks
 /******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
 /******/ 		var installedChunkData = installedChunks[chunkId];
-/******/ 		if(installedChunkData === 0) {
+/******/ 		if (installedChunkData === 0) {
 /******/ 			return new Promise(function(resolve) { resolve(); });
 /******/ 		}
 /******/
 /******/ 		// a Promise means "currently loading".
-/******/ 		if(installedChunkData) {
+/******/ 		if (installedChunkData) {
 /******/ 			return installedChunkData[2];
 /******/ 		}
 /******/
@@ -99,8 +99,8 @@
 /******/ 			script.onerror = script.onload = null;
 /******/ 			clearTimeout(timeout);
 /******/ 			var chunk = installedChunks[chunkId];
-/******/ 			if(chunk !== 0) {
-/******/ 				if(chunk) {
+/******/ 			if (chunk !== 0) {
+/******/ 				if (chunk) {
 /******/ 					chunk[1](new Error('Loading chunk ' + chunkId + ' failed.'));
 /******/ 				}
 /******/ 				installedChunks[chunkId] = undefined;
@@ -119,7 +119,7 @@
 /******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 		if (!__webpack_require__.o(exports, name)) {
 /******/ 			Object.defineProperty(exports, name, {
 /******/ 				configurable: false,
 /******/ 				enumerable: true,
@@ -22361,13 +22361,13 @@ try {
 	g = g || Function("return this")() || (1,eval)("this");
 } catch(e) {
 	// This works if the window reference is available
-	if(typeof window === "object")
+	if (typeof window === "object")
 		g = window;
 }
 
 // g can still be undefined, but nothing to do about it...
 // We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
+// easier to handle this case. if (!global) { ...}
 
 module.exports = g;
 
